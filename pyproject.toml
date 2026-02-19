@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "vlcr"
 version = "0.1.0"
-dependencies = ["audio-metadata"]
+dependencies = ["mutagen"]
 
 [project.scripts]
 vlcr = "vlcr.main:main"

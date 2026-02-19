@@ -1,7 +1,7 @@
 import sys
 from pathlib import Path
 import random
-import audio_metadata
+import mutagen
 import math
 import tempfile
 import subprocess
@@ -21,22 +21,23 @@ def main():
 
     # This creates the actual playlist entry string
     def create_entry(path):
-        try:
-            metadata = audio_metadata.load(path)
-            # Duration in seconds
-            duration = math.ceil(metadata["streaminfo"]["duration"])
-            # VLC expects uris
-            filepath = path.as_uri()
-            try:
-                title = metadata["tags"]["title"][0]
-            except:
-                # This song doesn't have a title
-                title = str(path)
-            # m3u standard
-            return f"#EXTINF:{duration},{title}\n{filepath}\n"
-        except audio_metadata.exceptions.UnsupportedFormat:
-            # This is not an audio file
+        metadata = mutagen.File(path, easy = True)
+        if not metadata:
             return ""
+        
+        # length seconds
+        duration = math.ceil(getattr(metadata.info, "length", 0))
+        title = str(path)
+        if metadata.tags:
+            titles = metadata.tags.get("title")
+            if titles:
+                title ,= titles
+
+        # VLC expects uris
+        filepath = path.as_uri()
+        
+        # m3u standard
+        return f"#EXTINF:{duration},{title}\n{filepath}\n"
 
     # Recursively finds all files.
     def recurse_dir(path):
