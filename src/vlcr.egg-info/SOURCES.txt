@@ -1,0 +1,10 @@
+README.md
+pyproject.toml
+src/vlcr/__init__.py
+src/vlcr/main.py
+src/vlcr.egg-info/PKG-INFO
+src/vlcr.egg-info/SOURCES.txt
+src/vlcr.egg-info/dependency_links.txt
+src/vlcr.egg-info/entry_points.txt
+src/vlcr.egg-info/requires.txt
+src/vlcr.egg-info/top_level.txt
