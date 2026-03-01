@@ -17,3 +17,7 @@ vlcr [PATH]
 ```
 
 Ignore any AudioMetadataWarning warnings.
+
+## Update
+
+I recently found out that VLC does this if you choose Tools -> Preferences -> All -> Playlist -> Subdirectory behavior -> Expand.
